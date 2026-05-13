@@ -12,5 +12,10 @@ final appRouter = GoRouter(
         path: '/numerator-river',
         builder: (context, state) => const NumeratorScreen(),
         ),
+              GoRoute(
+        path: '/bands',
+        builder: (context, state) => const BandsScreen(),
+        ),
+        
   ]
   );
