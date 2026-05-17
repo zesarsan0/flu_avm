@@ -1,11 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/config/config.dart';
+import 'package:flutter_application_1/presentation/providers/charta_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ComplereForm extends StatelessWidget {
+class ComplereForm extends ConsumerWidget {
   const ComplereForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: 200),
       child: DecoratedBox(
@@ -28,7 +31,7 @@ class ComplereForm extends StatelessWidget {
             children: [
               TextField(
                 keyboardType: TextInputType.name,
-                onChanged: (value) => { },
+                onChanged: (value) => ref.read(formNomenProvider.notifier).state=value ,
                 style:TextStyle(color: Colors.white, fontSize: 18),
                 decoration: InputDecoration(
                   hintText: 'Pon tu nombre',
@@ -84,7 +87,7 @@ class ComplereForm extends StatelessWidget {
               ),
               SizedBox(height: 16),
               FilledButton(
-                onPressed: () => { },
+                onPressed: () => _onFormSubmit(ref) ,
                 style: FilledButton.styleFrom(
                   backgroundColor: Colors.black45,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -97,4 +100,24 @@ class ComplereForm extends StatelessWidget {
       ),
     );
   }
+
+void _onFormSubmit(WidgetRef ref){
+  final String nameValue = ref.read(formNomenProvider);
+  final Color color = ref.read(formColorProvider);
+
+final String colorValue = exColorAdHex(color);
+
+if (nameValue.isEmpty) return;
+
+//TODO: Poner el marcador en el mapa
+
+// ignore: avoid_print
+print('name: $nameValue,color: $colorValue');
+
+
+}
+
+
+
+
 }
