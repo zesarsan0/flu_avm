@@ -18,19 +18,52 @@ class _ChartaScreenState extends ConsumerState<ChartaScreen> {
 CircleAnnotationManager? _circleAnnotationManager;
 
 
+Cancelable? _dragCancelable;
+
+
 void _initiareCircleAnnotations(MapboxMap mapboxmap){
 
 mapboxmap.annotations.createCircleAnnotationManager().then((manager){
   _circleAnnotationManager=manager;
 
+_setupDragListener(manager);
+
+
+
   _addereVelRenovaMarker();
 });
 }
+
+void _setupDragListener(CircleAnnotationManager manager){
+
+_dragCancelable?.cancel();
+
+_dragCancelable = manager.dragEvents(
+  onChanged: (CircleAnnotation annotation){
+
+    final pos= annotation.geometry.coordinates;
+    
+    ref.read(coordsMarkerProvider.notifier).state = pos;
+  },
+onEnd: (CircleAnnotation annotation){
+  final pos = annotation.geometry.coordinates;
+  ref.read(coordsMarkerProvider.notifier).state = pos;
+}
+
+);
+
+}
+
+
+
+
 
 Future<void> _addereVelRenovaMarker() async{
 
 final manager = _circleAnnotationManager;
 if (manager == null) return;
+
+await manager.deleteAll();
 
 
 final placed = ref.read(markerPositumProvider);
@@ -40,7 +73,7 @@ if (!placed){
   return;
 }
 
-final situs = Position(-122.467895, 37.800126);
+final situs = ref.read(coordsMarkerProvider);
 final color = ref.read(formColorProvider);
 
 final optiones = CircleAnnotationOptions(
@@ -58,6 +91,13 @@ try{
   debugPrint('Error al crear el marcador: $e');
 }
 }
+
+@override
+  void dispose() {
+    _dragCancelable?.cancel();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +119,7 @@ body:Stack(
     // ignore: deprecated_member_use
     cameraOptions: CameraOptions(
       center:Point(
-        coordinates: Position(-122.467895,37.800126),
+        coordinates: initialistMarkerPositio,
           ),
           zoom: 14.5,
     ) ,
@@ -88,13 +128,18 @@ body:Stack(
    ),
 
 
-      const Align (
+     Align (
         alignment: Alignment.topRight,
         child: Padding(
           padding: EdgeInsets.all(12.0),
-          child: ComplereForm()
+          child: ref.watch(markerPositumProvider)
+          ? InformaUsoris(
+            nomen: ref.watch(formNomenProvider),
+            positio: ref.watch(coordsMarkerProvider),
+            color: ref.watch(formColorProvider)
+            ) : SizedBox(),
           ),
-      )
+      ),
   ]
   )
 
