@@ -19,10 +19,13 @@ import '../config/config.dart';
 class ChartaService {
 
 IO.Socket? _socket;
-
 final Map<String, Usor> _usores = {};
-
 late final StreamController<List<Usor>> _usoresController;
+
+Stream<List<Usor>> get usoresStream => _usoresController.stream;
+
+
+String? get meusSocketId => _socket?.id;
 
 ChartaService(){
   _usoresController = StreamController<List<Usor>>.broadcast();
@@ -95,6 +98,27 @@ _socket!.connect();
 void _usoresListenRenovare(){
   _usoresController.add(List.from(_usores.values));
 }
+
+void mittereUsor({
+  required String nomen,
+  required String colorHex,
+  required Position position
+}) {
+  _socket !.emit('CLIENT_REGISTER',{
+    'nomen': nomen,
+    'color': colorHex,
+    'lng':position.lng,
+    'lat':position.lat
+  });
+}
+
+void mitterePositio(Position position){
+  _socket!.emit('CLIENT_MOVE',{
+    'lng': position.lng,
+    'lat': position.lat,
+  });
+}
+
 
 
 void finire(){

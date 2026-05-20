@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/config/helpers/coloris_forma.dart';
 import 'package:flutter_application_1/presentation/providers/charta_provider.dart';
 import 'package:flutter_application_1/presentation/widgets/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,16 +39,23 @@ void _setupDragListener(CircleAnnotationManager manager){
 
 _dragCancelable?.cancel();
 
+
+final socketService = ref.read(socketServiceProvider); 
+
+
 _dragCancelable = manager.dragEvents(
   onChanged: (CircleAnnotation annotation){
 
     final pos= annotation.geometry.coordinates;
-    
     ref.read(coordsMarkerProvider.notifier).state = pos;
+
+    socketService.mitterePositio(pos);
   },
 onEnd: (CircleAnnotation annotation){
   final pos = annotation.geometry.coordinates;
   ref.read(coordsMarkerProvider.notifier).state = pos;
+  socketService.mitterePositio(pos);
+
 }
 
 );
@@ -68,11 +76,9 @@ await manager.deleteAll();
 
 final placed = ref.read(markerPositumProvider);
 
-if (!placed){
-  await manager.deleteAll();
-  return;
-}
 
+
+if (placed){
 final situs = ref.read(coordsMarkerProvider);
 final color = ref.read(formColorProvider);
 
@@ -92,6 +98,39 @@ try{
 }
 }
 
+final aliiRudi = ref.read(aliiUsoresProvider).value ?? [];
+
+final meusId = ref.read(socketServiceProvider).meusSocketId;
+
+final alii = aliiRudi.where((u) => u.id != meusId).toList();
+
+for(final usor in alii){
+  final usorColor = adHexExColor(usor.colorhex);
+
+  final aliaOtionen = CircleAnnotationOptions(
+geometry: Point(coordinates: usor.positio),
+circleColor: usorColor.toARGB32(),
+circleRadius: 14.0,
+circleStrokeColor: Colors.white.toARGB32(),
+isDraggable: false
+);
+
+try {
+await manager.create(aliaOtionen);
+}catch (e){
+debugPrint('Error al crear marcador de otros usuarios: $e');
+}
+
+
+}
+
+
+
+
+}
+
+
+
 @override
   void dispose() {
     _dragCancelable?.cancel();
@@ -105,6 +144,14 @@ try{
     ref.listen<bool>(markerPositumProvider,(prev,next){
       if(next == true) _addereVelRenovaMarker();
     });
+
+
+  ref.listen(aliiUsoresProvider, (prev, next){
+    _addereVelRenovaMarker();
+  });
+
+
+
 
 
     return Scaffold(
