@@ -184,7 +184,7 @@ body:Stack(
             nomen: ref.watch(formNomenProvider),
             positio: ref.watch(coordsMarkerProvider),
             color: ref.watch(formColorProvider)
-            ) : SizedBox(),
+            ) : const ComplereForm(),
           ),
       ),
   ]
