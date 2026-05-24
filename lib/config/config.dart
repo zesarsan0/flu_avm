@@ -7,3 +7,5 @@ export './secret.dart';
 export 'entities/usor.dart';
 
 export 'entities/position.dart'; // TEMPORAL - borrar cuando se reactive Mapbox
+
+export './entities/pokemon.dart';
