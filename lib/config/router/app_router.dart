@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/screens/screens.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,17 +9,32 @@ final appRouter = GoRouter(
       path: '/',
       builder: (context, state) => const DomusScreen(),
       ),
-      GoRoute(
+        GoRoute(
         path: '/numerator-river',
         builder: (context, state) => const NumeratorScreen(),
         ),
-              GoRoute(
+        GoRoute(
         path: '/bands',
         builder: (context, state) => const BandsScreen(),
         ),
-                      GoRoute(
+        GoRoute(
         path: '/charta',
         builder: (context, state) => const ChartaScreen(),
+        ),
+        GoRoute(
+        path: '/request',
+        builder: (context, state) => const PokemonsScreen(),
+        routes: [
+          GoRoute(
+            path: ':id',
+            builder: (context, state) {
+              final id = state.pathParameters['id'] ?? '1';
+              return PokemonScreen(pokemonId:id,);
+            },
+
+            )
+
+        ]
         ),
   ]
   );
