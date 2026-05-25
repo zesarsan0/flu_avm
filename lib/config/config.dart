@@ -3,7 +3,7 @@ export './menu/menu_item.dart';
 export './router/app_router.dart';
 export './entities/band.dart';
 export 'helpers/coloris_forma.dart';
-export './secret.dart';
+//export './secret.dart';
 export 'entities/usor.dart';
 
 export 'entities/position.dart'; // TEMPORAL - borrar cuando se reactive Mapbox
