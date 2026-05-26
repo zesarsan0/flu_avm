@@ -18,7 +18,8 @@ class AppTheme {
     centerTitle: false,
   ),
   textTheme: TextTheme(
-    titleLarge: GoogleFonts.montserratAlternates()
+    titleLarge: GoogleFonts.montserratAlternates(),
+    
   )
  );
 
