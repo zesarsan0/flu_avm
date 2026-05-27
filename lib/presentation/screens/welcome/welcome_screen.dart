@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 //import '../domus/domus_screen.dart'; // cambia esto por tu pantalla real
 
 class WelcomeScreen extends ConsumerWidget {
@@ -30,6 +31,8 @@ class WelcomeScreen extends ConsumerWidget {
               _CardsSection(),
               const SizedBox(height: 7),
               _StatsRow(),
+              const SizedBox(height: 30),
+              _ComenzarButton(),
             ],
           ),
         ),
@@ -173,7 +176,7 @@ class _InfoSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
 
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 98, 192, 101),
+            color: const Color.fromARGB(255, 214, 116, 153),
             borderRadius: BorderRadius.circular(20),
           ),
 
@@ -333,6 +336,30 @@ class _StatResume extends StatelessWidget {
 
           Text(label, style: textStyles.labelSmall),
         ],
+      ),
+    );
+  }
+}
+
+class _ComenzarButton extends StatelessWidget {
+  const _ComenzarButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return SizedBox(
+      width: double.infinity,
+      child: FilledButton.icon(
+        onPressed: () {
+          context.push('/home');
+        },
+        icon: const Icon(Icons.arrow_forward),
+        label: const Text('Comenzar'),
+        style: FilledButton.styleFrom(
+          backgroundColor: colors.primary,
+          padding: const EdgeInsets.symmetric(vertical: 16),
+        ),
       ),
     );
   }
