@@ -176,7 +176,7 @@ class _InfoSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
 
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 214, 116, 153),
+            color: const Color.fromARGB(255, 93, 199, 111),
             borderRadius: BorderRadius.circular(20),
           ),
 
