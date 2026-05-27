@@ -4,19 +4,13 @@ import 'package:flutter_application_1/presentation/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
-Future <void> main() async{
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-WidgetsFlutterBinding.ensureInitialized();
+  // TEMPORAL: desactivado para web
+  //MapboxOptions.setAccessToken(mapboxAccessToken);
 
-
-// TEMPORAL: desactivado para web
-//MapboxOptions.setAccessToken(mapboxAccessToken);
-  
-  runApp(
-    const ProviderScope(
-    child: MainApp(),
-    )
-  );
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends ConsumerWidget {
@@ -24,16 +18,15 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final tenebrisModusEst = ref.watch(estTenebrisModusProvider);
-   
+
     return MaterialApp.router(
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
       theme: AppTheme(
         tenebrisModusEts: tenebrisModusEst,
-        electusColor: Colors.pink.shade900
-        ).getTheme(),
-      );
+        electusColor: Colors.pink.shade900,
+      ).getTheme(),
+    );
   }
 }

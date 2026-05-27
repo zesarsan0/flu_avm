@@ -8,19 +8,14 @@ class AppTheme {
 
   AppTheme({
     this.electusColor = const Color(0xFF1E1C36),
-    this.tenebrisModusEts = false
+    this.tenebrisModusEts = false,
   });
 
- ThemeData getTheme() => ThemeData(
-  colorSchemeSeed: electusColor,
-  brightness: tenebrisModusEts ? Brightness.dark : Brightness.light,
-  appBarTheme: AppBarTheme(
-    centerTitle: false,
-  ),
-  textTheme: TextTheme(
-    titleLarge: GoogleFonts.montserratAlternates(),
-    
-  )
- );
+  ThemeData getTheme() => ThemeData(
+    colorSchemeSeed: electusColor,
+    brightness: tenebrisModusEts ? Brightness.dark : Brightness.light,
 
+    appBarTheme: AppBarTheme(centerTitle: false),
+    textTheme: TextTheme(titleLarge: GoogleFonts.montserratAlternates()),
+  );
 }

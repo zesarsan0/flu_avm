@@ -26,6 +26,10 @@ class WelcomeScreen extends ConsumerWidget {
               ),
               _ConnectionRow(),
               _InfoSection(),
+              const SizedBox(height: 40),
+              _CardsSection(),
+              const SizedBox(height: 7),
+              _StatsRow(),
             ],
           ),
         ),
@@ -195,6 +199,141 @@ class _InfoSection extends StatelessWidget {
           style: textStyles.bodyMedium,
         ),
       ],
+    );
+  }
+}
+
+class _CardsSection extends StatelessWidget {
+  const _CardsSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: _FeatureCard(
+            title: 'Mapas',
+            subtitle: 'Ubicación en tiempo real',
+            imagePath: '../assets/images/mapa.jpg',
+          ),
+        ),
+        const SizedBox(width: 8),
+
+        Expanded(
+          child: _FeatureCard(
+            title: 'Votaciones',
+            subtitle: 'Gráfico que se actualiza',
+            imagePath: '../assets/images/votaciones.jpg',
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _FeatureCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final String imagePath;
+
+  const _FeatureCard({
+    required this.title,
+    required this.subtitle,
+    required this.imagePath,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyles = Theme.of(context).textTheme;
+    final colors = Theme.of(context).colorScheme;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: colors.primaryContainer,
+        borderRadius: BorderRadius.circular(10),
+      ),
+
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+
+        child: Column(
+          children: [
+            // IMAGEN
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image.asset(
+                imagePath,
+                height: 120,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            Text(title, style: textStyles.titleMedium),
+
+            const SizedBox(height: 8),
+
+            Text(
+              subtitle,
+              style: textStyles.bodySmall,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StatsRow extends StatelessWidget {
+  const _StatsRow();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _StatResume(number: '5', label: "PANTALLAS"),
+        const SizedBox(width: 8),
+        _StatResume(number: '2', label: "WEBSOCKETS"),
+        const SizedBox(width: 8),
+        _StatResume(number: 'CS', label: "CÉSAR SOTO"),
+      ],
+    );
+  }
+}
+
+class _StatResume extends StatelessWidget {
+  final String number;
+  final String label;
+
+  const _StatResume({required this.number, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final textStyles = Theme.of(context).textTheme;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 39, vertical: 7),
+
+      decoration: BoxDecoration(
+        color: colors.primaryContainer,
+        borderRadius: BorderRadius.circular(12),
+      ),
+
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(number, style: textStyles.titleMedium),
+
+          const SizedBox(height: 1),
+
+          Text(label, style: textStyles.labelSmall),
+        ],
+      ),
     );
   }
 }
