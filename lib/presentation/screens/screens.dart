@@ -5,3 +5,5 @@ export 'charta/charta_screen.dart';
 export './pokemons/pokemons_screen.dart';
 export './pokemons/pokemon_screen.dart';
 export './welcome/welcome_screen.dart';
+export './energy/energy_screen.dart';
+

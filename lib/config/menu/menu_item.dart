@@ -19,25 +19,31 @@ const appMenuItems = <MenuItem>[
     titulus: 'Contador',
     subtitulus: 'Introducción a Riverpod',
     link: '/numerator-river',
-    icon: Icons.add
+    icon: Icons.add,
   ),
-    MenuItem(
+  MenuItem(
     titulus: 'Bandas musicales',
     subtitulus: 'Gráficos Pie Chart y votaciones',
     link: '/bands',
-    icon: Icons.music_note_outlined
+    icon: Icons.music_note_outlined,
   ),
-    MenuItem(
+  MenuItem(
     titulus: 'Mapa',
     subtitulus: 'Localización de usuarios',
     link: '/charta',
-    icon: Icons.map_outlined
+    icon: Icons.map_outlined,
   ),
-      MenuItem(
+  MenuItem(
     titulus: 'PokeApi',
     subtitulus: 'Peticiones http a una Api',
     link: '/request',
-    icon: Icons.catching_pokemon
+    icon: Icons.catching_pokemon,
   ),
 
+  MenuItem(
+    titulus: 'Energía',
+    subtitulus: 'Estado energía del hogar',
+    link: '/energy',
+    icon: Icons.light_rounded,
+  ),
 ];
