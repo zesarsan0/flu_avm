@@ -733,6 +733,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.17"
+  three_d_pie_chart:
+    dependency: "direct main"
+    description:
+      name: three_d_pie_chart
+      sha256: "17799533f74d38c90675dbf90170b0aabf9442d056d9b75a937aff731739784c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   turf:
     dependency: transitive
     description:
