@@ -16,10 +16,10 @@ class EnergyScreen extends StatelessWidget {
         ),
       ),
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 245, 245, 240),
+        backgroundColor: const Color.fromARGB(255, 243, 243, 243),
 
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 245, 245, 240),
+          backgroundColor: const Color.fromARGB(255, 243, 243, 243),
           elevation: 0,
         ),
 
@@ -28,7 +28,7 @@ class EnergyScreen extends StatelessWidget {
           child: Column(
             children: [
               _EnergyHeader(),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
               _EnergyCard(),
             ],
           ),
@@ -56,25 +56,22 @@ class _EnergyHeader extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 22,
-              backgroundColor: const Color.fromARGB(255, 200, 230, 210),
-              child: const Icon(
-                Icons.person,
-                color: Color.fromARGB(255, 26, 100, 82),
-              ),
+              backgroundImage: const AssetImage('../assets/images/perfil.png'),
             ),
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Welcome César',
+                  'César Soto',
                   style: textStyles.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 19,
                   ),
                 ),
-                const SizedBox(height: 2),
+              
                 Text(
-                  'Tu energía del hogar en tus manos',
+                  '29.05.2026',
                   style: textStyles.bodySmall?.copyWith(
                     color: Colors.grey,
                   ),
@@ -86,13 +83,16 @@ class _EnergyHeader extends StatelessWidget {
 
         const CircleAvatar(
           radius: 22,
+          foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           child: Icon(Icons.notifications_outlined),
+          
         ),
       ],
     );
   }
 }
+
 
 //-----------------------------------------------------
 // ENERGY CARD
@@ -128,7 +128,7 @@ class _EnergyCardState extends State<_EnergyCard> {
       const Color.fromARGB(255, 55, 110, 80),
       const Color.fromARGB(255, 255, 162, 41),
       const Color.fromARGB(255, 228, 144, 221),
-      const Color.fromARGB(255, 78, 111, 253),
+     const Color.fromARGB(255, 136, 214, 84),
     ];
 
     _chartData = List.generate(4, (i) {
@@ -174,43 +174,48 @@ class _EnergyCardState extends State<_EnergyCard> {
                   holeRadius: 130,
                 ),
 
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      '2,4kW',
-                      style: textStyles.headlineLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'Potencia actual',
-                      style: textStyles.bodySmall?.copyWith(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
+               Row(
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    Icon(
+      Icons.bolt,
+      color: Color.fromARGB(255, 0, 0, 0),
+      size: 32,
+    ),
+    const SizedBox(width: 2),
+    Text(
+      '2,4kW',
+      style: textStyles.headlineLarge?.copyWith(
+        fontWeight: FontWeight.w500,
+        fontSize: 40,
+      ),
+    ),
+  ],
+),
               ],
             ),
 
-            const SizedBox(height: 8),
+            const SizedBox(height: 15),
 
-            //-----------------------------------------------------
-            // BADGE
-            //-----------------------------------------------------
+            Column(
+  children: [
+    Text(
+      '4h 30min',
+      style: textStyles.headlineSmall?.copyWith(
+        fontWeight: FontWeight.w500,
+      ),
+    ),
 
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 26, 100, 82),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Text(
-                '● CONECTADO',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+    const SizedBox(height: 1),
+
+    Text(
+      'Horas de uso optimizado',
+      style: textStyles.bodySmall?.copyWith(
+        color: Colors.grey,
+      ),
+    ),
+  ],
+),
 
             const SizedBox(height: 24),
 
@@ -237,42 +242,34 @@ class _EnergyCardState extends State<_EnergyCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Dispositivos',
-                        style: textStyles.labelMedium?.copyWith(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-
-                      const SizedBox(height: 25),
 
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
+                            SizedBox(width: 4),
                             _IconoDispositivo(
                               icono: Icons.wb_sunny_outlined,
                               titulo: 'Solar',
                               subtitulo: '1.2 kW',
                               color: Color.fromARGB(255, 255, 162, 41),
                             ),
-                            SizedBox(width: 25),
+                            SizedBox(width: 30),
                             _IconoDispositivo(
                               icono: Icons.bolt,
                               titulo: 'Red',
                               subtitulo: '0.8 kW',
                               color: Color.fromARGB(255, 55, 110, 80),
                             ),
-                            SizedBox(width: 25),
+                            SizedBox(width: 30),
                             _IconoDispositivo(
                               icono: Icons.home_outlined,
                               titulo: 'Hogar',
                               subtitulo: '2.4 kW',
-                              color: Color.fromARGB(255, 78, 111, 253),
+                              color: Color.fromARGB(255, 136, 214, 84),
                             ),
-                            SizedBox(width: 25),
+                            SizedBox(width: 30),
                             _IconoDispositivo(
                               icono: Icons.power_outlined,
                               titulo: 'Enchufe',
@@ -286,7 +283,7 @@ class _EnergyCardState extends State<_EnergyCard> {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 8),
 
                 //-------------------------------------------------
                 // SEGUNDO CARD
