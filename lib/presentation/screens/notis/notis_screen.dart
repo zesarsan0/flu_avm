@@ -8,7 +8,9 @@ class NotisScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        textTheme: GoogleFonts.manropeTextTheme(),
+        textTheme: GoogleFonts.manropeTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 243, 243, 243),
@@ -22,9 +24,7 @@ class NotisScreen extends StatelessWidget {
               Icons.arrow_back_ios_new_rounded,
               color: Colors.black,
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            onPressed: () => Navigator.pop(context),
           ),
         ),
 
@@ -38,35 +38,77 @@ class NotisScreen extends StatelessWidget {
               Text(
                 'Assign new team',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
 
               const SizedBox(height: 4),
 
-              Text(
-                'Gestiona todas los usuarios del equipo hogar',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Colors.grey,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Gestiona todas los usuarios del equipo Salón hogar',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          color: Colors.grey,
+                        ),
+                  ),
+
+                  const SizedBox(height: 4),
+
+                  Row(
+                    children: const [
+                      Icon(
+                        Icons.chair_outlined,
+                        size: 35,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(width: 4),
+                    ],
+                  ),
+                ],
               ),
 
               const SizedBox(height: 60),
 
               const _NotiCard(
                 texto: 'César',
+                esUsuario: true,
               ),
 
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
               const _NotiCard(
                 texto: 'Blanca',
+                icono: Icons.person,
               ),
 
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
               const _NotiCard(
                 texto: 'Enrique',
+                icono: Icons.person,
+              ),
+
+              // BOTÓN +
+              const SizedBox(height: 20),
+
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1.6,
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.grey,
+                  ),
+                ),
               ),
             ],
           ),
@@ -77,49 +119,60 @@ class NotisScreen extends StatelessWidget {
 }
 
 //-----------------------------------------------------
-// TARJETA NOTIFICACIÓN
+// CARD NOTIFICACIÓN
 //-----------------------------------------------------
 
 class _NotiCard extends StatelessWidget {
   final String texto;
+  final IconData? icono;
+  final bool esUsuario;
 
   const _NotiCard({
     required this.texto,
+    this.icono,
+    this.esUsuario = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 14,
       ),
-
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-
       child: Row(
         children: [
-          const CircleAvatar(
+          //--------------------------------------------------
+          // AVATAR
+          //--------------------------------------------------
+
+          CircleAvatar(
             radius: 18,
-            backgroundColor: Color.fromARGB(
-              255,
-              200,
-              230,
-              210,
-            ),
-            child: Icon(
-              Icons.person,
-              size: 18,
-              color: Color.fromARGB(255, 26, 100, 82),
-            ),
+            backgroundColor: const Color.fromARGB(100, 228, 144, 221),
+
+            child: esUsuario
+                ? const CircleAvatar(
+                    radius: 16,
+                    backgroundImage:
+                        AssetImage('../assets/images/perfil.png'),
+                  )
+                : Icon(
+                    icono ?? Icons.notifications,
+                    size: 18,
+                    color: const Color.fromARGB(255, 228, 144, 221),
+                  ),
           ),
 
           const SizedBox(width: 12),
+
+          //--------------------------------------------------
+          // TEXTO
+          //--------------------------------------------------
 
           Expanded(
             child: Text(
@@ -130,6 +183,10 @@ class _NotiCard extends StatelessWidget {
               ),
             ),
           ),
+
+          //--------------------------------------------------
+          // BOTÓN X
+          //--------------------------------------------------
 
           IconButton(
             onPressed: () {},
