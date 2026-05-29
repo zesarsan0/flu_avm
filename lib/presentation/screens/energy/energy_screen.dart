@@ -1,10 +1,9 @@
 import 'dart:math';
-
+import 'package:go_router/go_router.dart';
 import 'package:awesome_circular_chart/awesome_circular_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class EnergyScreen extends StatelessWidget {
   const EnergyScreen({super.key});
@@ -82,14 +81,23 @@ class _EnergyHeader extends StatelessWidget {
             ),
           ],
         ),
+       
 
-        const CircleAvatar(
+       IconButton(
+        onPressed: (){
+          context.push('/notis');
+        },
+        icon: const CircleAvatar(
           radius: 22,
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
-          child: Icon(Icons.notifications_outlined),
+          child: 
+          
+          Icon(Icons.notifications_outlined),
+          
           
         ),
+       ),
       ],
     );
   }

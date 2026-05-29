@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 final appRouter = GoRouter(
   initialLocation: '/',
   routes: [
+        GoRoute(path: '/notis', builder: (context, state) => const NotisScreen()),
     GoRoute(path: '/energy', builder: (context, state) => const EnergyScreen()),
     GoRoute(path: '/', builder: (context, state) => const WelcomeScreen()),
     GoRoute(path: '/home', builder: (context, state) => const DomusScreen()),

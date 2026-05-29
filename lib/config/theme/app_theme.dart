@@ -16,6 +16,6 @@ class AppTheme {
     brightness: tenebrisModusEts ? Brightness.dark : Brightness.light,
 
     appBarTheme: AppBarTheme(centerTitle: false),
-    textTheme: TextTheme(titleLarge: GoogleFonts.montserratAlternates()),
+    textTheme:GoogleFonts.manropeTextTheme(),
   );
 }
