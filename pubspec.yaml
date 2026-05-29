@@ -17,6 +17,7 @@ dependencies:
   mapbox_maps_flutter: ^2.23.1
   pie_chart: ^5.4.0
   socket_io_client: ^3.1.4
+  syncfusion_flutter_charts: ^33.2.8
   three_d_pie_chart: ^1.0.3
 
 dev_dependencies:

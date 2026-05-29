@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:awesome_circular_chart/awesome_circular_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class EnergyScreen extends StatelessWidget {
   const EnergyScreen({super.key});
@@ -290,14 +292,62 @@ class _EnergyCardState extends State<_EnergyCard> {
                 //-------------------------------------------------
 
                 Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  
-                ),
+  width: double.infinity,
+  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 17),
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(10),
+  ),
+
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start, 
+    children: [
+
+      // TÍTULO PEQUEÑO
+      Text(
+        'Consumo diario',
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+    fontWeight: FontWeight.w800,
+    color: Colors.black,
+        ),
+      ),
+
+      const SizedBox(height: 1),
+
+      // GRÁFICO
+      SizedBox(
+        height: 155,
+        child: SfCartesianChart(
+          primaryXAxis: CategoryAxis(
+            majorGridLines: const MajorGridLines(width: 0),
+            axisLine: const AxisLine(width: 0),
+            majorTickLines: const MajorTickLines(width: 0),
+          ),
+          primaryYAxis: NumericAxis(isVisible: false),
+          plotAreaBorderWidth: 0,
+
+          series: <CartesianSeries>[
+            ColumnSeries<Map<String, dynamic>, String>(
+              dataSource: const [
+                {'x': 'Lun', 'y': 30, 'color': Color.fromARGB(99, 219, 219, 218)},
+                {'x': 'Mar', 'y': 40, 'color': Color.fromARGB(255, 255, 162, 41)},
+                {'x': 'Mié', 'y': 25, 'color': Color.fromARGB(99, 219, 219, 218)},
+                {'x': 'Jue', 'y': 50, 'color': Color.fromARGB(99, 219, 219, 218)},
+                {'x': 'Vie', 'y': 35, 'color': Color.fromARGB(99, 219, 219, 218)},
+              ],
+              xValueMapper: (data, _) => data['x'],
+              yValueMapper: (data, _) => data['y'],
+              pointColorMapper: (data, _) => data['color'],
+              width: 0.9,
+             borderRadius: BorderRadius.circular(4),
+
+            ),
+          ],
+        ),
+      ),
+    ],
+  ),
+),
               ],
             ),
           ],
