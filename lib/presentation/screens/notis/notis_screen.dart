@@ -18,7 +18,6 @@ class NotisScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 243, 243, 243),
           elevation: 0,
-
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
@@ -56,8 +55,8 @@ class NotisScreen extends StatelessWidget {
 
                   const SizedBox(height: 4),
 
-                  Row(
-                    children: const [
+                  const Row(
+                    children: [
                       Icon(
                         Icons.chair_outlined,
                         size: 35,
@@ -71,26 +70,25 @@ class NotisScreen extends StatelessWidget {
 
               const SizedBox(height: 60),
 
-              const _NotiCard(
+              const NotiCard(
                 texto: 'César',
                 esUsuario: true,
               ),
 
               const SizedBox(height: 10),
 
-              const _NotiCard(
+              const NotiCard(
                 texto: 'Blanca',
                 icono: Icons.person,
               ),
 
               const SizedBox(height: 10),
 
-              const _NotiCard(
+              const NotiCard(
                 texto: 'Enrique',
                 icono: Icons.person,
               ),
 
-              // BOTÓN +
               const SizedBox(height: 20),
 
               Center(
@@ -101,13 +99,105 @@ class NotisScreen extends StatelessWidget {
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: Colors.grey,
-                      width: 1.6,
+                      width: 1.5,
                     ),
                   ),
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.grey,
+                  child: const Icon(Icons.add, color: Colors.grey),
+                ),
+              ),
+
+              const SizedBox(height: 70),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 180,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.settings, color: Colors.orange),
+                          SizedBox(height: 10),
+                          Text(
+                            'Servicio técnico',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            'Contactar para resolver problemas',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Container(
+                      height: 180,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.solar_power, color: Colors.green),
+                          SizedBox(height: 10),
+                          Text(
+                            'Paneles solares',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            'Gestionar instalación de placas',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              Container(
+                height: 60,
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 29, 29, 29),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Confirmar',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -119,15 +209,16 @@ class NotisScreen extends StatelessWidget {
 }
 
 //-----------------------------------------------------
-// CARD NOTIFICACIÓN
+// CARD
 //-----------------------------------------------------
 
-class _NotiCard extends StatelessWidget {
+class NotiCard extends StatelessWidget {
   final String texto;
   final IconData? icono;
   final bool esUsuario;
 
-  const _NotiCard({
+  const NotiCard({
+    super.key,
     required this.texto,
     this.icono,
     this.esUsuario = false,
@@ -147,14 +238,9 @@ class _NotiCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          //--------------------------------------------------
-          // AVATAR
-          //--------------------------------------------------
-
           CircleAvatar(
             radius: 18,
             backgroundColor: const Color.fromARGB(100, 228, 144, 221),
-
             child: esUsuario
                 ? const CircleAvatar(
                     radius: 16,
@@ -167,13 +253,7 @@ class _NotiCard extends StatelessWidget {
                     color: const Color.fromARGB(255, 228, 144, 221),
                   ),
           ),
-
           const SizedBox(width: 12),
-
-          //--------------------------------------------------
-          // TEXTO
-          //--------------------------------------------------
-
           Expanded(
             child: Text(
               texto,
@@ -183,11 +263,6 @@ class _NotiCard extends StatelessWidget {
               ),
             ),
           ),
-
-          //--------------------------------------------------
-          // BOTÓN X
-          //--------------------------------------------------
-
           IconButton(
             onPressed: () {},
             icon: const Icon(
