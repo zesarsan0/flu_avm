@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-//import '../domus/domus_screen.dart'; // cambia esto por tu pantalla real
+//import '../domus/domus_screen.dart'; 
 
 class WelcomeScreen extends ConsumerWidget {
   const WelcomeScreen({super.key});
@@ -130,7 +130,7 @@ class _ConnectionRow extends StatelessWidget {
 
             const Spacer(),
 
-            // PUNTOS (imagen transparente)
+            // PUNTOS
             Image.asset('../assets/icon/puntos.png', width: 120),
 
             const Spacer(),
@@ -299,9 +299,9 @@ class _StatsRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _StatResume(number: '5', label: "PANTALLAS"),
-        const SizedBox(width: 8),
+        const SizedBox(width: 7),
         _StatResume(number: '2', label: "WEBSOCKETS"),
-        const SizedBox(width: 8),
+        const SizedBox(width: 7),
         _StatResume(number: 'CS', label: "CÉSAR SOTO"),
       ],
     );
